@@ -22,7 +22,6 @@ import java.util.List;
 
 import accesoDatos.DatosException;
 import accesoDatos.OperacionesDAO;
-import accesoDatos.fichero.UsuariosDAO;
 import config.Configuracion;
 import modelo.ModeloException;
 import modelo.SesionUsuario;
@@ -33,8 +32,8 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 	private static SesionesDAO instancia = null;
 
 	// Elemento de almacenamiento. 
-	private static ArrayList<SesionUsuario> datosSesiones;
-	private static File fSesiones;
+	private ArrayList<SesionUsuario> datosSesiones;
+	private File fSesiones;
 
 	/**
 	 * Constructor por defecto de uso interno.
@@ -45,7 +44,8 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 		fSesiones = new File(Configuracion.get().getProperty("sesiones.nombreFichero"));
 		try {
 			recuperarDatos();
-		} catch (DatosException e) { }
+		} 
+		catch (DatosException e) { }
 	}
 
 	/**
@@ -157,7 +157,7 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 		}	
 		return -(inicio + 1);					// Posición que ocuparía -negativo- base 1
 	}
-
+	
 	/**
 	 * Búsqueda de Sesion dado un objeto, reenvía al método que utiliza idSesion.
 	 * @param obj - la SesionUsuario a buscar.
@@ -168,6 +168,15 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 		return this.obtener(((SesionUsuario) obj).getIdSesion());
 	}	
 
+	/**
+	 * Obtiene todos los objetos SesionUsuario almacenados.
+	 * @return - la List con todas las sesiones.
+	 */
+	@Override
+	public List<SesionUsuario> obtenerTodos() {
+		return datosSesiones;
+	}
+	
 	/**
 	 * Búsqueda de todas la sesiones de un mismo usuario.
 	 * @param idUsr - el identificador de usuario a buscar.
@@ -202,7 +211,7 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 		// devuelve la sublista de sesiones buscadas.
 		return datosSesiones.subList(primera, ultima+1);
 	}
-
+	
 	/**
 	 * Alta de una nueva SesionUsuario en orden y sin repeticiones según IdUsr + fecha. 
 	 * Busca previamente la posición que le corresponde por búsqueda binaria.
@@ -236,7 +245,7 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 		}
 		throw new DatosException("(BAJA) La SesionUsuario: " + idSesion + " no existe...");
 	}
-
+	
 	/**
 	 *  Actualiza datos de una SesionUsuario reemplazando el almacenado por el recibido.
 	 *	@param obj - SesionUsuario con las modificaciones.
@@ -254,7 +263,7 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 		}
 		throw new DatosException("(ACTUALIZAR) La SesionUsuario: " + sesionActualizada.getIdSesion() + " no existe...");
 	}
-
+	
 	/**
 	 * Obtiene el listado de todos las sesiones almacenadas.
 	 * @return el texto con el volcado de datos.
@@ -263,18 +272,17 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 	public String listarDatos() {
 		StringBuilder listado = new StringBuilder();
 		for (SesionUsuario sesion: datosSesiones) {
-			if (sesion != null) {
-				listado.append("\n" + sesion);
-			}
+			listado.append("\n" + sesion);
 		}
 		return listado.toString();
 	}
-	
+
 	/**
 	 * Obtiene el listado de todos los identificadores de las sesiones almacenadas.
 	 * @return el texto con los identificadores.
 	 */
-	public String listarIdSesiones() {
+	@Override
+	public String listarId() {
 		StringBuilder listado = new StringBuilder();
 		for (SesionUsuario sesion: datosSesiones) {
 			if (sesion != null) {
@@ -289,7 +297,7 @@ public class SesionesDAO implements OperacionesDAO, Persistente {
 	 */
 	@Override
 	public void borrarTodo() {
-		datosSesiones = new ArrayList<SesionUsuario>();	
+		datosSesiones = new ArrayList<SesionUsuario>();
 	}
 
 }//class
