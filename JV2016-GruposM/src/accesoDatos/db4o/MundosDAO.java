@@ -80,8 +80,8 @@ public class MundosDAO implements OperacionesDAO {
 		// En este array los 0 indican celdas con célula muerta y los 1 vivas
 		byte[][] espacioDemo =  new byte[][]{ 
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, //
-			{ 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, //
-			{ 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0 }, //
+			{ 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 }, //
+			{ 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0 }, //
 			{ 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0 }, //
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 
 			{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 

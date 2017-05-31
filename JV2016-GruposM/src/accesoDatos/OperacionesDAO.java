@@ -1,10 +1,11 @@
 /** 
  * Proyecto: Juego de la vida.
- * Interfaz con las operaciones b√°sicas DAO, necesarias para la fachada.
+
+ * Interfaz con las operaciones b·sicas DAO, necesarias para la fachada.
  * @since: prototipo2.1
  * @source: OperacionesDAO.java  
- * @version: 2.1 - 2017.04.23 
- * @author: ajp
+ * @version: 2.1 - 2017.05.31 
+ * @author: Alejandro S·nchez
  */
 
 package accesoDatos;
@@ -32,7 +33,7 @@ public interface OperacionesDAO {
 	 * Obtiene todos los objeto del mismo tipo.
 	 * @return - la List con los objetos encontrados.
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings( "rawtypes")
 	List obtenerTodos();
 	
 	/**
@@ -56,7 +57,7 @@ public interface OperacionesDAO {
 	 *	@param obj - Objeto nuevo.
 	 *  @throws DatosException - si no existe.
 	 */
-	void actualizar(Object obj) throws DatosException;
+	void actualizar (Object obj) throws DatosException;
 	
 	/**
 	 * Obtiene el listado de todos los datos almacenados.
